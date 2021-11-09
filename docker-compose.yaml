@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  api:
+    build: ./api
+    ports:
+      - "8989:8989"
+    volumes:
+      - ./api/src:/app
+    command:
+      - python3
+      - api.py
+  webapp:
+    build: ./webapp
+    ports:
+      - "8081:80"
+    volumes:
+      - ./webapp/website:/var/www/html/
+    environment:
+      - INSTANCE_STATUS=test
+      - API_URL=api
